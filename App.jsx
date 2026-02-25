@@ -710,28 +710,31 @@ const ContactAndFooter = () => {
                     <p className="font-outfit text-sm md:text-base text-[#1A1829]/70 mb-10">I am currently looking for full-time opportunities in process engineering, sustainable materials, and modeling.</p>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <a href="mailto:shivam100401@gmail.com" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
+                        <a href="mailto:shivam100401@gmail.com" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-all hover:-translate-y-1" data-cursor="magnetic">
                             <div className="w-12 h-12 bg-[#FF6B4A]/10 text-[#FF6B4A] rounded-full flex items-center justify-center group-hover:bg-[#FF6B4A] group-hover:text-white transition-colors">
                                 <i data-lucide="mail"></i>
                             </div>
                             <span className="font-heading font-semibold text-[#1A1829] text-[0.95rem]">Direct Email</span>
                             <span className="font-outfit text-xs text-[#1A1829]/50">shivam100401@gmail.com</span>
+                            <span className="font-data text-[9px] uppercase tracking-widest text-[#FF6B4A] opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">↗ Send Email</span>
                         </a>
 
-                        <a href="https://linkedin.com/in/shivam100401" target="_blank" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
+                        <a href="https://linkedin.com/in/shivam100401" target="_blank" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-all hover:-translate-y-1" data-cursor="magnetic">
                             <div className="w-12 h-12 bg-[#4A90E2]/10 text-[#4A90E2] rounded-full flex items-center justify-center group-hover:bg-[#4A90E2] group-hover:text-white transition-colors">
                                 <i data-lucide="linkedin"></i>
                             </div>
                             <span className="font-heading font-semibold text-[#1A1829] text-[0.95rem]">LinkedIn Network</span>
                             <span className="font-outfit text-xs text-[#1A1829]/50">Connect professionally</span>
+                            <span className="font-data text-[9px] uppercase tracking-widest text-[#4A90E2] opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">↗ Open Profile</span>
                         </a>
 
-                        <a href="./resume.pdf" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
+                        <a href="./resume.pdf" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-all hover:-translate-y-1" data-cursor="magnetic">
                             <div className="w-12 h-12 bg-[#1A1829]/10 text-[#1A1829] rounded-full flex items-center justify-center group-hover:bg-[#1A1829] group-hover:text-white transition-colors">
                                 <i data-lucide="file-text"></i>
                             </div>
                             <span className="font-heading font-semibold text-[#1A1829] text-[0.95rem]">Full Resume</span>
                             <span className="font-outfit text-xs text-[#1A1829]/50">Download specifications</span>
+                            <span className="font-data text-[9px] uppercase tracking-widest text-[#1A1829]/70 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">↗ View PDF</span>
                         </a>
                     </div>
                 </div>
