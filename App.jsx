@@ -136,7 +136,7 @@ const Navbar = () => {
                 <a href="#skills" className="hover:text-[#FF6B4A] hover:-translate-y-[1px] transition-all">Skills</a>
             </div>
             <a href="#contact" className="font-outfit font-semibold text-sm px-6 py-2.5 rounded-full bg-[#1A1829] text-[#FAF8F5] magnetic-btn shadow-md relative overflow-hidden group">
-                <span className="relative z-10">Hire Me</span>
+                <span className="relative z-10">Contact Me</span>
                 <div className="absolute inset-0 bg-[#FF6B4A] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0 rounded-full"></div>
             </a>
         </nav>
