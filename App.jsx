@@ -445,19 +445,21 @@ const About = () => {
     const sectionRef = useRef();
 
     useLayoutEffect(() => {
-        let ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 95%",
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    let ctx = gsap.context(() => {
+                        const tl = gsap.timeline();
+                        tl.from(".about-img", { x: -40, opacity: 0, duration: 1, ease: "power3.out" })
+                            .from(".about-text", { y: 20, opacity: 0, duration: 0.8, stagger: 0.15 }, "-=0.6")
+                            .from(".about-chip", { y: 15, opacity: 0, duration: 0.6, stagger: 0.1 }, "-=0.4");
+                    }, sectionRef);
+                    observer.disconnect();
                 }
             });
-
-            tl.from(".about-img", { x: -40, opacity: 0, duration: 1, ease: "power3.out" })
-                .from(".about-text", { y: 20, opacity: 0, duration: 0.8, stagger: 0.15 }, "-=0.6")
-                .from(".about-chip", { y: 15, opacity: 0, duration: 0.6, stagger: 0.1 }, "-=0.4");
-        }, sectionRef);
-        return () => ctx.revert();
+        }, { threshold: 0.05 });
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
     }, []);
 
     return (
