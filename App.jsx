@@ -130,12 +130,12 @@ const Navbar = () => {
                     : 'bg-transparent text-[#1A1829] w-[95%] md:w-[800px]'}`}
         >
             <div className="font-heading font-bold tracking-tight text-2xl text-[#FF6B4A]">{BRAND_NAME}</div>
-            <div className="hidden md:flex items-center gap-6 font-sans text-sm font-medium text-[#1A1829]/80">
+            <div className="hidden md:flex items-center gap-6 font-outfit text-sm font-medium text-[#1A1829]/80">
                 <a href="#about" className="hover:text-[#FF6B4A] hover:-translate-y-[1px] transition-all">About</a>
                 <a href="#work" className="hover:text-[#FF6B4A] hover:-translate-y-[1px] transition-all">Work</a>
                 <a href="#skills" className="hover:text-[#FF6B4A] hover:-translate-y-[1px] transition-all">Skills</a>
             </div>
-            <a href="#contact" className="font-sans font-semibold text-sm px-6 py-2.5 rounded-full bg-[#1A1829] text-[#FAF8F5] magnetic-btn shadow-md relative overflow-hidden group">
+            <a href="#contact" className="font-outfit font-semibold text-sm px-6 py-2.5 rounded-full bg-[#1A1829] text-[#FAF8F5] magnetic-btn shadow-md relative overflow-hidden group">
                 <span className="relative z-10">Hire Me</span>
                 <div className="absolute inset-0 bg-[#FF6B4A] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0 rounded-full"></div>
             </a>
@@ -144,15 +144,15 @@ const Navbar = () => {
 };
 
 const ExplodingCADWidget = () => (
-    <div className="reveal-bento aspect-[5/4] sm:aspect-square bg-[#FAF8F5] rounded-[2rem] border border-[#1A1829]/5 shadow-sm flex flex-col items-center justify-center relative group overflow-hidden" data-cursor="bracket">
+    <div className="reveal-bento col-span-2 aspect-[16/7] md:aspect-[16/8] bg-[#FAF8F5] rounded-[2rem] border border-[#1A1829]/5 shadow-sm flex flex-col items-center justify-center relative group overflow-hidden" data-cursor="bracket">
 
         <div className="absolute top-4 left-4 z-10 pointer-events-none">
             <span className="font-data text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-[#1A1829]/40 font-bold mb-1 block">CAD Viewer</span>
-            <span className="font-sans text-[8px] md:text-[9px] text-[#1A1829]/80 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">Hover to explode</span>
+            <span className="font-outfit text-[8px] md:text-[9px] text-[#1A1829]/80 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">Hover to explode</span>
         </div>
 
-        <div className="relative w-full h-[120%] flex items-center justify-center pointer-events-none mt-2 translate-y-2">
-            <svg viewBox="0 0 400 300" className="w-[140%] h-[140%] max-w-[400px] drop-shadow-md overflow-visible relative -left-[10%]">
+        <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
+            <svg viewBox="0 0 400 300" className="w-full h-full max-w-[500px] drop-shadow-md overflow-visible">
                 <style>
                     {`
                         .cad-part { transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease; opacity: 0.95; }
@@ -301,13 +301,13 @@ const Hero = () => {
                     </h1>
 
                     <div className="hero-cta flex flex-wrap gap-4 mt-8">
-                        <a href="#contact" data-cursor="magnetic" className="bg-[#FF6B4A] text-[#FAF8F5] px-6 py-3 rounded-full font-sans font-semibold text-[13px] tracking-wide magnetic-btn relative overflow-hidden group shadow-[0_8px_20px_rgba(255,107,74,0.3)] inline-flex items-center gap-2">
+                        <a href="#contact" data-cursor="magnetic" className="bg-[#FF6B4A] text-[#FAF8F5] px-6 py-3 rounded-full font-outfit font-semibold text-[13px] tracking-wide magnetic-btn relative overflow-hidden group shadow-[0_8px_20px_rgba(255,107,74,0.3)] inline-flex items-center gap-2">
                             <span className="relative z-10">Start a Conversation</span>
                             <div className="absolute inset-0 bg-[#1A1829] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0 flex items-center justify-center font-semibold">
                                 <span className="flex items-center gap-2 text-[#FAF8F5] text-[13px]">Start a Conversation</span>
                             </div>
                         </a>
-                        <a href="#about" data-cursor="hover" className="bg-white/50 backdrop-blur-sm border border-[#1A1829]/10 text-[#1A1829] px-6 py-3 rounded-full font-sans font-semibold text-[13px] tracking-wide magnetic-btn hover:bg-white transition-colors">
+                        <a href="#about" data-cursor="hover" className="bg-white/50 backdrop-blur-sm border border-[#1A1829]/10 text-[#1A1829] px-6 py-3 rounded-full font-outfit font-semibold text-[13px] tracking-wide magnetic-btn hover:bg-white transition-colors">
                             Learn More
                         </a>
                     </div>
@@ -323,12 +323,6 @@ const Hero = () => {
                         <div className="text-xl md:text-2xl font-heading font-medium text-[#1A1829] leading-tight group-hover:text-[#4A90E2] transition-colors" data-cursor="hover">
                             Engineering robust solutions for sustainable industry.
                         </div>
-                    </div>
-
-                    <div className="reveal-bento aspect-square bg-[#1A1829] rounded-[2rem] p-4 flex flex-col items-center justify-center text-white relative overflow-hidden group" data-cursor="hover">
-                        <div className="absolute inset-0 bg-[#FF6B4A]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <i data-lucide="droplet" className="w-8 h-8 text-[#FF6B4A] mb-3 group-hover:scale-110 transition-transform"></i>
-                        <span className="font-sans text-xs md:text-sm font-medium">Fluid Dynamics</span>
                     </div>
 
                     <ExplodingCADWidget />
@@ -425,10 +419,10 @@ const WorkCard = ({ project, index }) => {
             <div className={`lg:col-span-5 ${isEven ? 'lg:order-2' : 'lg:order-1'} p-2`} data-cursor="hover">
                 <div className="font-data text-[#FF6B4A] text-[9px] md:text-[10px] tracking-widest uppercase mb-3">{project.context}</div>
                 <h3 className="font-heading font-semibold text-2xl md:text-3xl text-[#1A1829] mb-4 tracking-tight">{project.title}</h3>
-                <p className="font-sans text-[#1A1829]/70 text-[0.85rem] md:text-sm leading-relaxed mb-6">{project.desc}</p>
+                <p className="font-outfit text-[#1A1829]/70 text-[0.85rem] md:text-sm leading-relaxed mb-6">{project.desc}</p>
 
                 <div className="bg-[#FAF8F5] border-l-4 border-[#FF6B4A] p-4 rounded-r-2xl shadow-sm">
-                    <p className="font-sans italic text-[#1A1829] font-medium leading-relaxed text-xs md:text-[13px]">
+                    <p className="font-outfit italic text-[#1A1829] font-medium leading-relaxed text-xs md:text-[13px]">
                         "{project.outcome}"
                     </p>
                 </div>
@@ -463,7 +457,7 @@ const Work = () => {
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16" data-cursor="hover">
                     <h2 className="font-heading font-bold text-4xl md:text-5xl text-[#1A1829] mb-4">Selected Projects</h2>
-                    <p className="font-sans text-[#1A1829]/60 max-w-xl mx-auto text-sm md:text-[0.95rem]">Applied engineering across battery technologies and broad industrial processes.</p>
+                    <p className="font-outfit text-[#1A1829]/60 max-w-xl mx-auto text-sm md:text-[0.95rem]">Applied engineering across battery technologies and broad industrial processes.</p>
                 </div>
                 <div className="space-y-8 md:space-y-12">
                     {PROJECTS.map((p, i) => <WorkCard key={i} project={p} index={i} />)}
@@ -484,7 +478,7 @@ const SkillChip = ({ skill }) => {
                 </div>
                 {/* Back */}
                 <div className="absolute inset-0 bg-[#FF6B4A] rounded-2xl flex items-center justify-center p-3 backface-hidden rotate-y-180 shadow-lg text-white">
-                    <span className="font-sans text-[11px] text-center leading-tight font-medium">{skill.desc}</span>
+                    <span className="font-outfit text-[11px] text-center leading-tight font-medium">{skill.desc}</span>
                 </div>
             </div>
             {/* CSS Additions for 3D flip since Tailwind assumes custom classes for this */}
@@ -565,7 +559,7 @@ const SkillsAndPhilosophy = () => {
 
                         <div className="bg-white/40 p-6 rounded-[2rem] border border-[#1A1829]/5" data-cursor="hover">
                             <h3 className="font-heading font-semibold text-xl md:text-2xl text-[#1A1829] mb-4">Engineering Philosophy</h3>
-                            <div className="space-y-4 text-[#1A1829]/80 font-sans text-sm leading-relaxed">
+                            <div className="space-y-4 text-[#1A1829]/80 font-outfit text-sm leading-relaxed">
                                 <p>
                                     I believe the best engineers operate where the math meets the metal. It is not enough to simulate a perfect process; you have to understand the physical constraints of the hardware, the flow dynamics, and the operational realities of the plant floor.
                                 </p>
@@ -590,7 +584,7 @@ const SkillsAndPhilosophy = () => {
                 </div>
 
                 <div className="relative z-10 max-w-5xl mx-auto text-center px-4">
-                    <p className="phil-text font-sans text-xl md:text-2xl text-[#FAF8F5]/60 mb-8 max-w-2xl mx-auto" data-cursor="hover">
+                    <p className="phil-text font-outfit text-xl md:text-2xl text-[#FAF8F5]/60 mb-8 max-w-2xl mx-auto" data-cursor="hover">
                         Most approaches focus on: <span className="text-white">immediate short-term yields.</span>
                     </p>
                     <h2 className="phil-text font-heading font-medium text-4xl md:text-6xl text-white leading-tight mb-8" data-cursor="hover">
@@ -609,7 +603,7 @@ const ContactAndFooter = () => {
             <section className="py-24 px-6 text-center max-w-4xl mx-auto">
                 <div className="max-w-4xl mx-auto text-center" data-cursor="hover">
                     <h2 className="font-heading font-bold text-4xl md:text-6xl text-[#1A1829] mb-4">Let's Connect</h2>
-                    <p className="font-sans text-sm md:text-base text-[#1A1829]/70 mb-10">I am currently looking for full-time opportunities in process engineering, sustainable materials, and modeling.</p>
+                    <p className="font-outfit text-sm md:text-base text-[#1A1829]/70 mb-10">I am currently looking for full-time opportunities in process engineering, sustainable materials, and modeling.</p>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <a href="mailto:shivam100401@gmail.com" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
@@ -617,7 +611,7 @@ const ContactAndFooter = () => {
                                 <i data-lucide="mail"></i>
                             </div>
                             <span className="font-heading font-semibold text-[#1A1829] text-[0.95rem]">Direct Email</span>
-                            <span className="font-sans text-xs text-[#1A1829]/50">shivam100401@gmail.com</span>
+                            <span className="font-outfit text-xs text-[#1A1829]/50">shivam100401@gmail.com</span>
                         </a>
 
                         <a href="https://linkedin.com/in/shivam100401" target="_blank" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
@@ -625,7 +619,7 @@ const ContactAndFooter = () => {
                                 <i data-lucide="linkedin"></i>
                             </div>
                             <span className="font-heading font-semibold text-[#1A1829] text-[0.95rem]">LinkedIn Network</span>
-                            <span className="font-sans text-xs text-[#1A1829]/50">Connect professionally</span>
+                            <span className="font-outfit text-xs text-[#1A1829]/50">Connect professionally</span>
                         </a>
 
                         <a href="#" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
@@ -633,7 +627,7 @@ const ContactAndFooter = () => {
                                 <i data-lucide="file-text"></i>
                             </div>
                             <span className="font-heading font-semibold text-[#1A1829] text-[0.95rem]">Full Resume</span>
-                            <span className="font-sans text-xs text-[#1A1829]/50">Download specifications</span>
+                            <span className="font-outfit text-xs text-[#1A1829]/50">Download specifications</span>
                         </a>
                     </div>
                 </div>
@@ -647,10 +641,10 @@ const ContactAndFooter = () => {
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 mb-16">
                     <div>
                         <h2 className="font-heading font-bold text-3xl md:text-4xl mb-4 tracking-tight">{BRAND_NAME}</h2>
-                        <p className="font-sans text-lg opacity-60 max-w-xs">{JOB_TITLE}</p>
+                        <p className="font-outfit text-lg opacity-60 max-w-xs">{JOB_TITLE}</p>
                     </div>
 
-                    <div className="flex md:justify-end font-sans">
+                    <div className="flex md:justify-end font-outfit">
                         <ul className="flex gap-8 opacity-70 font-semibold text-sm">
                             <li><a href="#about" className="hover:text-white transition-colors">About</a></li>
                             <li><a href="#work" className="hover:text-white transition-colors">Work</a></li>
@@ -684,6 +678,8 @@ const App = () => {
 
     return (
         <div className="min-h-screen">
+            <div id="cursor-dot"></div>
+            <div id="cursor-shell"></div>
             <Navbar />
             <main>
                 <Hero />
