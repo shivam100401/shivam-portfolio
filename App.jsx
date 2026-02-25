@@ -726,7 +726,7 @@ const ContactAndFooter = () => {
                             <span className="font-outfit text-xs text-[#1A1829]/50">Connect professionally</span>
                         </a>
 
-                        <a href="./resume.pdf" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
+                        <a href="./shivam100401resume.pdf" target="_blank" rel="noopener noreferrer" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
                             <div className="w-12 h-12 bg-[#1A1829]/10 text-[#1A1829] rounded-full flex items-center justify-center group-hover:bg-[#1A1829] group-hover:text-white transition-colors">
                                 <i data-lucide="file-text"></i>
                             </div>
