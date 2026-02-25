@@ -483,7 +483,7 @@ const About = () => {
 
                 <div className="lg:col-span-7 relative z-10" data-cursor="hover">
                     <h2 className="about-text font-heading font-medium text-3xl md:text-4xl text-[#1A1829] mb-6">The Human Behind the Work</h2>
-                    <div className="space-y-4 text-[#1A1829]/95 font-outfit text-xl md:text-2xl font-light leading-[1.6] tracking-wide mb-10" data-cursor="hover">
+                    <div className="space-y-4 text-[#1A1829]/95 font-outfit text-base md:text-lg font-light leading-[1.7] tracking-wide mb-10" data-cursor="hover">
                         {BIO_PARAGRAPHS.map((p, i) => <p key={i} className="about-text">{p}</p>)}
                     </div>
 
@@ -659,9 +659,9 @@ const SkillsAndPhilosophy = () => {
                             </div>
                         </div>
 
-                        <div className="bg-white/40 p-6 rounded-[2rem] border border-[#1A1829]/5" data-cursor="hover">
-                            <h3 className="font-heading font-semibold text-xl md:text-2xl text-[#1A1829] mb-4">Engineering Philosophy</h3>
-                            <div className="space-y-4 text-[#1A1829]/80 font-outfit text-sm leading-relaxed">
+                        <div className="bg-white/40 p-8 rounded-[2rem] border border-[#1A1829]/5" data-cursor="hover">
+                            <h3 className="font-heading font-semibold text-2xl md:text-3xl text-[#1A1829] mb-6">Engineering Philosophy</h3>
+                            <div className="space-y-5 text-[#1A1829]/80 font-outfit text-base md:text-lg leading-relaxed">
                                 <p>
                                     I believe the best engineers operate where the math meets the metal. It is not enough to simulate a perfect process; you have to understand the physical constraints of the hardware, the flow dynamics, and the operational realities of the plant floor.
                                 </p>
