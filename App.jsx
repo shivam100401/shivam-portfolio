@@ -144,7 +144,7 @@ const Navbar = () => {
 };
 
 const ExplodingCADWidget = () => (
-    <div className="reveal-bento col-span-2 aspect-[16/9] md:aspect-[16/10] bg-gradient-to-br from-[#e8edf2] to-[#d5dce6] rounded-[2rem] border border-[#1A1829]/8 shadow-lg flex flex-col items-center justify-center relative group overflow-visible" data-cursor="bracket">
+    <div className="reveal-bento col-span-2 aspect-[4/3] md:aspect-[5/4] bg-gradient-to-br from-[#e8edf2] to-[#d5dce6] rounded-[2rem] border border-[#1A1829]/8 shadow-lg flex flex-col items-center justify-center relative group overflow-visible" data-cursor="bracket">
 
         <div className="absolute top-5 left-5 z-20 pointer-events-none">
             <span className="font-data text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-[#1A1829]/50 font-bold block">Reactor Assembly</span>
@@ -233,7 +233,7 @@ const ExplodingCADWidget = () => (
                     <g className="reactor-label">
                         <line x1="305" y1="405" x2="400" y2="405" className="reactor-leader" />
                         <rect x="400" y="395" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
-                        <text x="407" y="409" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">MOTOR</text>
+                        <text x="407" y="409" fontSize="12" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">MOTOR</text>
                     </g>
                 </g>
 
@@ -253,7 +253,7 @@ const ExplodingCADWidget = () => (
                     <g className="reactor-label">
                         <line x1="315" y1="342" x2="400" y2="342" className="reactor-leader" />
                         <rect x="400" y="332" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
-                        <text x="407" y="346" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">MAGNETS</text>
+                        <text x="407" y="346" fontSize="12" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">MAGNETS</text>
                     </g>
                 </g>
 
@@ -274,7 +274,7 @@ const ExplodingCADWidget = () => (
                     <g className="reactor-label">
                         <line x1="325" y1="283" x2="400" y2="283" className="reactor-leader" />
                         <rect x="400" y="273" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
-                        <text x="407" y="287" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">PTFE BODY</text>
+                        <text x="407" y="287" fontSize="12" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">PTFE BODY</text>
                     </g>
                 </g>
 
@@ -292,7 +292,7 @@ const ExplodingCADWidget = () => (
                     <g className="reactor-label">
                         <line x1="190" y1="218" x2="105" y2="218" className="reactor-leader" />
                         <rect x="20" y="208" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
-                        <text x="27" y="222" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">FLUID PORTS</text>
+                        <text x="27" y="222" fontSize="12" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">FLUID PORTS</text>
                     </g>
                 </g>
 
@@ -308,7 +308,7 @@ const ExplodingCADWidget = () => (
                     <g className="reactor-label">
                         <line x1="195" y1="192" x2="105" y2="172" className="reactor-leader" />
                         <rect x="20" y="162" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
-                        <text x="27" y="176" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">SS WINDOW</text>
+                        <text x="27" y="176" fontSize="12" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">SS WINDOW</text>
                     </g>
                 </g>
 
@@ -333,7 +333,7 @@ const ExplodingCADWidget = () => (
                     <g className="reactor-label">
                         <line x1="195" y1="148" x2="105" y2="125" className="reactor-leader" />
                         <rect x="20" y="115" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
-                        <text x="27" y="129" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">SS COVER</text>
+                        <text x="27" y="129" fontSize="12" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">SS COVER</text>
                     </g>
                 </g>
             </svg>
