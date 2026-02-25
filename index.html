@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivam Patel | Chemical Engineer</title>
+
+    <!-- Fonts for Retrofuturistic (V3) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=MuseoModerno:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS (Play CDN for buildless) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FAF8F5',   /* Warm Off-White */
+                        accent: '#FF6B4A',    /* Soft Sunset Orange/Coral */
+                        accent2: '#4A90E2',   /* Soft tech blue */
+                        dark: '#1A1829',      /* Deep warm purple-black */
+                        surface: '#Fdfcfb',   /* Paper surface */
+                    },
+                    fontFamily: {
+                        heading: ['"MuseoModerno"', 'sans-serif'],
+                        sans: ['"Inter"', 'sans-serif'],
+                        data: ['"DM Mono"', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Core Structural Styles -->
+    <style>
+        body {
+            background-color: #FAF8F5;
+            color: #1A1829;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Soft Grain Overlay for Retro Vibe */
+        .noise-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            pointer-events: none;
+            opacity: 0.04;
+            mix-blend-mode: multiply;
+        }
+
+        .magnetic-btn {
+            transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .magnetic-btn:hover {
+            transform: scale(1.03);
+        }
+
+        /* Blur gradient blobs */
+        .glow-blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: 0;
+            opacity: 0.15;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+    </style>
+
+    <!-- React, ReactDOM, Babel (for JSX), GSAP, Lucide -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="antialiased selection:bg-accent selection:text-white">
+
+    <!-- Global Noise Overlay -->
+    <svg class="noise-overlay" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <filter id="noise">
+            <feTurbulence type="fractalNoise" baseFrequency="1.2" numOctaves="3" stitchTiles="stitch" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#noise)" />
+    </svg>
+
+    <div id="root"></div>
+
+    <!-- Application Logic -->
+    <script type="text/babel" src="./App.jsx"></script>
+</body>
+
+</html>
