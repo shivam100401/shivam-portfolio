@@ -144,100 +144,305 @@ const Navbar = () => {
 };
 
 const ExplodingCADWidget = () => (
-    <div className="reveal-bento col-span-2 aspect-[16/7] md:aspect-[16/8] bg-[#FAF8F5] rounded-[2rem] border border-[#1A1829]/5 shadow-sm flex flex-col items-center justify-center relative group overflow-hidden" data-cursor="bracket">
+    <div className="reveal-bento col-span-2 aspect-[16/9] md:aspect-[16/10] bg-gradient-to-br from-[#e8edf2] to-[#d5dce6] rounded-[2rem] border border-[#1A1829]/8 shadow-lg flex flex-col items-center justify-center relative group overflow-visible" data-cursor="bracket">
 
-        <div className="absolute top-4 left-4 z-10 pointer-events-none">
-            <span className="font-data text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-[#1A1829]/40 font-bold mb-1 block">CAD Viewer</span>
-            <span className="font-outfit text-[8px] md:text-[9px] text-[#1A1829]/80 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">Hover to explode</span>
+        <div className="absolute top-5 left-5 z-20 pointer-events-none">
+            <span className="font-data text-[9px] md:text-[10px] uppercase tracking-[0.25em] text-[#1A1829]/50 font-bold block">Reactor Assembly</span>
+            <span className="font-outfit text-[9px] md:text-[10px] text-[#FF6B4A] font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100 block mt-0.5">{'\u27E8'} Exploded View {'\u27E9'}</span>
+        </div>
+        <div className="absolute top-5 right-5 z-20 pointer-events-none flex items-center gap-2">
+            <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-[pulse_2s_infinite]"></div>
+            <span className="font-data text-[8px] uppercase tracking-widest text-[#1A1829]/30">Interactive</span>
         </div>
 
-        <div className="relative w-full h-full flex items-center justify-center pointer-events-none">
-            <svg viewBox="0 0 400 300" className="w-full h-full max-w-[500px] drop-shadow-md overflow-visible">
+        <div className="relative w-full h-full flex items-center justify-center pointer-events-none p-4 md:p-6">
+            <svg viewBox="0 0 520 500" className="w-full h-full max-w-[520px] overflow-visible" style={{ filter: 'drop-shadow(0 8px 24px rgba(0,0,0,0.12))' }}>
+                <defs>
+                    <linearGradient id="metalBlue" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stopColor="#7B8FB5" />
+                        <stop offset="50%" stopColor="#6478A0" />
+                        <stop offset="100%" stopColor="#4D5F85" />
+                    </linearGradient>
+                    <linearGradient id="metalLight" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#B0BDD0" />
+                        <stop offset="100%" stopColor="#8A9AB5" />
+                    </linearGradient>
+                    <linearGradient id="motorGray" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#999" />
+                        <stop offset="100%" stopColor="#666" />
+                    </linearGradient>
+                    <linearGradient id="ptfeWhite" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#f0ece4" />
+                        <stop offset="100%" stopColor="#ddd8cc" />
+                    </linearGradient>
+                    <linearGradient id="greenAccent" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#8BC34A" />
+                        <stop offset="100%" stopColor="#689F38" />
+                    </linearGradient>
+                    <linearGradient id="windowGlass" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="rgba(200,220,240,0.6)" />
+                        <stop offset="100%" stopColor="rgba(160,185,215,0.4)" />
+                    </linearGradient>
+                </defs>
+
                 <style>
                     {`
-                        .cad-part { transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease; opacity: 0.95; }
-                        .cad-label { opacity: 0; transition: opacity 0.4s ease 0.3s; pointer-events: none; }
-                        .cad-line { opacity: 0; transition: opacity 0.4s ease 0.2s, stroke 0.4s; stroke: #4A90E2; stroke-width: 1; stroke-dasharray: 4,4; }
-                        
-                        .group:hover .cad-part { opacity: 1; filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.15)); }
-                        .group:hover .cad-label { opacity: 1; }
-                        .group:hover .cad-line { opacity: 0.5; }
-                        
-                        .group:hover .part-shaft { transform: translate(-35px, 17px); }
-                        .group:hover .part-endplate { transform: translate(-10px, 5px); }
-                        .group:hover .part-rotor { transform: translate(15px, -7px) scale(0.95); }
-                        .group:hover .part-stator { transform: translate(45px, -22px); }
-                        .group:hover .part-handle { transform: translate(80px, -40px); }
+                        .reactor-part {
+                            transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1),
+                                        filter 0.6s ease;
+                        }
+                        .reactor-label {
+                            opacity: 0;
+                            transition: opacity 0.5s ease 0.4s;
+                            pointer-events: none;
+                        }
+                        .reactor-leader {
+                            opacity: 0;
+                            transition: opacity 0.4s ease 0.2s;
+                            stroke: #1A1829;
+                            stroke-width: 0.8;
+                            stroke-dasharray: 3 3;
+                        }
+
+                        .group:hover .reactor-part {
+                            filter: drop-shadow(0px 12px 20px rgba(0,0,0,0.18));
+                        }
+                        .group:hover .reactor-label { opacity: 1; }
+                        .group:hover .reactor-leader { opacity: 0.6; }
+
+                        .group:hover .part-cover     { transform: translate(0px, -55px); transition-delay: 0s; }
+                        .group:hover .part-window     { transform: translate(0px, -28px); transition-delay: 0.05s; }
+                        .group:hover .part-ports      { transform: translate(0px, -42px) scale(1.05); transition-delay: 0.1s; }
+                        .group:hover .part-reactor    { transform: translate(0px, 0px); transition-delay: 0.15s; }
+                        .group:hover .part-magnets    { transform: translate(0px, 35px); transition-delay: 0.2s; }
+                        .group:hover .part-motor      { transform: translate(0px, 70px); transition-delay: 0.25s; }
                     `}
                 </style>
 
-                <line x1="80" y1="180" x2="320" y2="60" className="cad-line" />
-
-                {/* 1. HANDLE */}
-                <g className="cad-part part-handle">
-                    <path d="M 230 110 Q 280 60 320 80 Q 320 140 280 180 Q 250 160 230 110 Z" fill="#2D3A70" stroke="#1A1829" strokeWidth="2" strokeLinejoin="round" />
-                    <path d="M 260 125 Q 280 100 295 110 Q 295 130 280 145 Q 265 130 260 125 Z" fill="#FAF8F5" />
-                    <g className="cad-label">
-                        <line x1="280" y1="70" x2="310" y2="40" stroke="#1A1829" strokeWidth="1" />
-                        <rect x="310" y="28" width="50" height="15" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1" />
-                        <text x="314" y="38" fontSize="8" fontFamily="monospace" fill="#1A1829">HANDLE</text>
+                {/* ===== 6. INTEGRATED MOTOR (bottom) ===== */}
+                <g className="reactor-part part-motor">
+                    <rect x="210" y="360" width="100" height="14" rx="3" fill="url(#metalBlue)" stroke="#4D5F85" strokeWidth="1.5" />
+                    <circle cx="218" cy="367" r="3" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.8" />
+                    <circle cx="302" cy="367" r="3" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.8" />
+                    <rect x="220" y="374" width="80" height="85" rx="6" fill="url(#motorGray)" stroke="#555" strokeWidth="1.5" />
+                    <line x1="225" y1="384" x2="295" y2="384" stroke="#777" strokeWidth="1" />
+                    <line x1="225" y1="397" x2="295" y2="397" stroke="#777" strokeWidth="1" />
+                    <line x1="225" y1="410" x2="295" y2="410" stroke="#777" strokeWidth="1" />
+                    <line x1="225" y1="423" x2="295" y2="423" stroke="#777" strokeWidth="1" />
+                    <rect x="248" y="430" width="24" height="30" rx="3" fill="#888" stroke="#555" strokeWidth="1" />
+                    <g className="reactor-label">
+                        <line x1="305" y1="405" x2="400" y2="405" className="reactor-leader" />
+                        <rect x="400" y="395" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="407" y="409" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">MOTOR</text>
                     </g>
                 </g>
 
-                {/* 2. STATOR */}
-                <g className="cad-part part-stator">
-                    <path d="M 180 100 Q 220 70 240 100 Q 230 160 190 150 Q 160 140 180 100 Z" fill="#4B5E65" stroke="#1A1829" strokeWidth="2" strokeLinejoin="round" />
-                    <path d="M 175 80 Q 185 60 210 70" fill="none" stroke="#1A1829" strokeWidth="4" />
-                    <path d="M 195 160 Q 210 180 235 160" fill="none" stroke="#1A1829" strokeWidth="4" />
-                    <g className="cad-label">
-                        <line x1="200" y1="70" x2="210" y2="30" stroke="#1A1829" strokeWidth="1" />
-                        <rect x="180" y="15" width="85" height="15" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1" />
-                        <text x="184" y="25" fontSize="8" fontFamily="monospace" fill="#1A1829">STATOR_WINDINGS</text>
+                {/* ===== 5. MAGNETIC HOLDER / MAGNETS ===== */}
+                <g className="reactor-part part-magnets">
+                    <path d="M 205 330 L 205 355 Q 205 360 210 360 L 310 360 Q 315 360 315 355 L 315 330 Q 315 325 310 325 L 210 325 Q 205 325 205 330 Z" fill="url(#metalLight)" stroke="#7888A0" strokeWidth="1.5" />
+                    <rect x="218" y="330" width="16" height="24" rx="8" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1" />
+                    <rect x="242" y="330" width="16" height="24" rx="8" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1" />
+                    <rect x="266" y="330" width="16" height="24" rx="8" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1" />
+                    <rect x="290" y="330" width="16" height="24" rx="8" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1" />
+                    <ellipse cx="226" cy="334" rx="4" ry="2" fill="rgba(255,255,255,0.4)" />
+                    <ellipse cx="250" cy="334" rx="4" ry="2" fill="rgba(255,255,255,0.4)" />
+                    <ellipse cx="274" cy="334" rx="4" ry="2" fill="rgba(255,255,255,0.4)" />
+                    <ellipse cx="298" cy="334" rx="4" ry="2" fill="rgba(255,255,255,0.4)" />
+                    <circle cx="260" cy="342" r="7" fill="#555" stroke="#444" strokeWidth="1" />
+                    <circle cx="260" cy="342" r="3" fill="#333" />
+                    <g className="reactor-label">
+                        <line x1="315" y1="342" x2="400" y2="342" className="reactor-leader" />
+                        <rect x="400" y="332" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="407" y="346" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">MAGNETS</text>
                     </g>
                 </g>
 
-                {/* 3. ROTOR */}
-                <g className="cad-part part-rotor">
-                    <path d="M 150 110 L 160 90 L 175 105 Z" fill="#4A90E2" stroke="#1A1829" strokeWidth="1.5" strokeLinejoin="round" />
-                    <path d="M 155 130 L 150 150 L 170 145 Z" fill="#4A90E2" stroke="#1A1829" strokeWidth="1.5" strokeLinejoin="round" />
-                    <path d="M 170 115 L 190 100 L 195 120 Z" fill="#4A90E2" stroke="#1A1829" strokeWidth="1.5" strokeLinejoin="round" />
-                    <path d="M 165 140 L 190 155 L 185 135 Z" fill="#4A90E2" stroke="#1A1829" strokeWidth="1.5" strokeLinejoin="round" />
-                    <circle cx="170" cy="125" r="12" fill="#FAF8F5" stroke="#1A1829" strokeWidth="2" />
-                    <circle cx="170" cy="125" r="4" fill="#1A1829" />
-                    <g className="cad-label">
-                        <line x1="170" y1="105" x2="160" y2="70" stroke="#1A1829" strokeWidth="1" />
-                        <rect x="125" y="55" width="60" height="15" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1" />
-                        <text x="129" y="65" fontSize="8" fontFamily="monospace" fill="#1A1829">ROTOR_FAN</text>
+                {/* ===== 4. PTFE-STAINLESS REACTOR BODY ===== */}
+                <g className="reactor-part part-reactor">
+                    <rect x="195" y="238" width="130" height="8" rx="3" fill="url(#metalBlue)" stroke="#4D5F85" strokeWidth="1.2" />
+                    <rect x="195" y="246" width="130" height="75" rx="8" fill="url(#ptfeWhite)" stroke="#bbb5a5" strokeWidth="1.5" />
+                    <rect x="215" y="256" width="90" height="55" rx="5" fill="#e8e2d6" stroke="#ccc5b5" strokeWidth="1" />
+                    <rect x="195" y="318" width="130" height="8" rx="3" fill="url(#metalBlue)" stroke="#4D5F85" strokeWidth="1.2" />
+                    <circle cx="203" cy="242" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="317" cy="242" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="203" cy="322" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="317" cy="322" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <line x1="240" y1="268" x2="240" y2="298" stroke="#ccc" strokeWidth="1.5" />
+                    <line x1="260" y1="263" x2="260" y2="303" stroke="#ccc" strokeWidth="1.5" />
+                    <line x1="280" y1="268" x2="280" y2="298" stroke="#ccc" strokeWidth="1.5" />
+                    <circle cx="260" cy="283" r="10" fill="none" stroke="#ddd" strokeWidth="0.8" strokeDasharray="3 2" />
+                    <g className="reactor-label">
+                        <line x1="325" y1="283" x2="400" y2="283" className="reactor-leader" />
+                        <rect x="400" y="273" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="407" y="287" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">PTFE BODY</text>
                     </g>
                 </g>
 
-                {/* 4. ENDPLATE */}
-                <g className="cad-part part-endplate">
-                    <path d="M 110 130 Q 130 90 150 115 Q 160 150 130 160 Q 100 150 110 130 Z" fill="#E6C84C" stroke="#1A1829" strokeWidth="2" strokeLinejoin="round" />
-                    <circle cx="135" cy="130" r="8" fill="#FAF8F5" stroke="#1A1829" strokeWidth="2" />
-                    <path d="M 105 135 L 115 130" stroke="#1A1829" strokeWidth="2" />
-                    <g className="cad-label">
-                        <line x1="120" y1="100" x2="110" y2="60" stroke="#1A1829" strokeWidth="1" />
-                        <rect x="50" y="45" width="80" height="15" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1" />
-                        <text x="54" y="55" fontSize="8" fontFamily="monospace" fill="#1A1829">MOTOR_ENDPLATE</text>
+                {/* ===== 3. FLUIDIC PORTS ===== */}
+                <g className="reactor-part part-ports">
+                    <rect x="190" y="205" width="18" height="34" rx="5" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1.2" />
+                    <ellipse cx="199" cy="205" rx="9" ry="4.5" fill="#9CCC65" stroke="#558B2F" strokeWidth="1" />
+                    <circle cx="199" cy="205" r="3.5" fill="#444" />
+                    <rect x="312" y="205" width="18" height="34" rx="5" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1.2" />
+                    <ellipse cx="321" cy="205" rx="9" ry="4.5" fill="#9CCC65" stroke="#558B2F" strokeWidth="1" />
+                    <circle cx="321" cy="205" r="3.5" fill="#444" />
+                    <rect x="240" y="200" width="18" height="38" rx="5" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1.2" />
+                    <ellipse cx="249" cy="200" rx="9" ry="4.5" fill="#9CCC65" stroke="#558B2F" strokeWidth="1" />
+                    <circle cx="249" cy="200" r="3.5" fill="#444" />
+                    <g className="reactor-label">
+                        <line x1="190" y1="218" x2="105" y2="218" className="reactor-leader" />
+                        <rect x="20" y="208" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="27" y="222" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">FLUID PORTS</text>
                     </g>
                 </g>
 
-                {/* 5. SHAFT */}
-                <g className="cad-part part-shaft">
-                    <path d="M 50 170 L 130 130 L 135 140 L 55 180 Z" fill="#889CBA" stroke="#1A1829" strokeWidth="2" strokeLinejoin="round" />
-                    <rect x="70" y="145" width="8" height="20" transform="rotate(-26.5, 74, 155)" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1.5" />
-                    <rect x="100" y="130" width="10" height="25" transform="rotate(-26.5, 105, 142)" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1.5" />
-                    <g className="cad-label">
-                        <line x1="70" y1="150" x2="60" y2="120" stroke="#1A1829" strokeWidth="1" />
-                        <rect x="25" y="105" width="40" height="15" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1" />
-                        <text x="29" y="115" fontSize="8" fontFamily="monospace" fill="#1A1829">SHAFT</text>
+                {/* ===== 2. GLASS / STAINLESS STEEL WINDOW ===== */}
+                <g className="reactor-part part-window">
+                    <rect x="195" y="178" width="130" height="28" rx="6" fill="url(#metalBlue)" stroke="#4D5F85" strokeWidth="1.5" />
+                    <rect x="215" y="183" width="90" height="18" rx="4" fill="url(#windowGlass)" stroke="#8BA0C0" strokeWidth="1" />
+                    <line x1="225" y1="186" x2="235" y2="198" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" strokeLinecap="round" />
+                    <line x1="250" y1="186" x2="260" y2="198" stroke="rgba(255,255,255,0.3)" strokeWidth="1" strokeLinecap="round" />
+                    <line x1="275" y1="187" x2="282" y2="196" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" strokeLinecap="round" />
+                    <circle cx="203" cy="192" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="317" cy="192" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <g className="reactor-label">
+                        <line x1="195" y1="192" x2="105" y2="172" className="reactor-leader" />
+                        <rect x="20" y="162" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="27" y="176" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">SS WINDOW</text>
+                    </g>
+                </g>
+
+                {/* ===== 1. STAINLESS STEEL COVER (top) ===== */}
+                <g className="reactor-part part-cover">
+                    <rect x="195" y="132" width="130" height="44" rx="8" fill="url(#metalBlue)" stroke="#4D5F85" strokeWidth="1.5" />
+                    <rect x="200" y="137" width="120" height="6" rx="2" fill="rgba(255,255,255,0.15)" />
+                    <rect x="183" y="142" width="16" height="24" rx="3" fill="url(#metalLight)" stroke="#7888A0" strokeWidth="1" />
+                    <circle cx="191" cy="149" r="2" fill="#555" />
+                    <circle cx="191" cy="160" r="2" fill="#555" />
+                    <rect x="321" y="142" width="16" height="24" rx="3" fill="url(#metalLight)" stroke="#7888A0" strokeWidth="1" />
+                    <circle cx="329" cy="149" r="2" fill="#555" />
+                    <circle cx="329" cy="160" r="2" fill="#555" />
+                    <circle cx="260" cy="154" r="12" fill="url(#metalLight)" stroke="#7888A0" strokeWidth="1.5" />
+                    <circle cx="260" cy="154" r="6" fill="#8A9AB5" />
+                    <circle cx="260" cy="154" r="2.5" fill="#555" />
+                    <path d="M 245 132 Q 245 118 260 118 Q 275 118 275 132" fill="none" stroke="#7888A0" strokeWidth="3.5" strokeLinecap="round" />
+                    <circle cx="208" cy="168" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="230" cy="168" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="290" cy="168" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="312" cy="168" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <g className="reactor-label">
+                        <line x1="195" y1="148" x2="105" y2="125" className="reactor-leader" />
+                        <rect x="20" y="115" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="27" y="129" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">SS COVER</text>
                     </g>
                 </g>
             </svg>
         </div>
     </div>
 );
+                <g className="reactor-part part-magnets">
+                    <path d="M 205 330 L 205 355 Q 205 360 210 360 L 310 360 Q 315 360 315 355 L 315 330 Q 315 325 310 325 L 210 325 Q 205 325 205 330 Z" fill="url(#metalLight)" stroke="#7888A0" strokeWidth="1.5" />
+                    <rect x="218" y="330" width="16" height="24" rx="8" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1" />
+                    <rect x="242" y="330" width="16" height="24" rx="8" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1" />
+                    <rect x="266" y="330" width="16" height="24" rx="8" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1" />
+                    <rect x="290" y="330" width="16" height="24" rx="8" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1" />
+                    <ellipse cx="226" cy="334" rx="4" ry="2" fill="rgba(255,255,255,0.4)" />
+                    <ellipse cx="250" cy="334" rx="4" ry="2" fill="rgba(255,255,255,0.4)" />
+                    <ellipse cx="274" cy="334" rx="4" ry="2" fill="rgba(255,255,255,0.4)" />
+                    <ellipse cx="298" cy="334" rx="4" ry="2" fill="rgba(255,255,255,0.4)" />
+                    <circle cx="260" cy="342" r="7" fill="#555" stroke="#444" strokeWidth="1" />
+                    <circle cx="260" cy="342" r="3" fill="#333" />
+                    <g className="reactor-label">
+                        <line x1="315" y1="342" x2="400" y2="342" className="reactor-leader" />
+                        <rect x="400" y="332" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="407" y="346" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">MAGNETS</text>
+                    </g>
+                </g>
+
+                {/* ===== 4. PTFE-STAINLESS REACTOR BODY ===== */}
+                <g className="reactor-part part-reactor">
+                    <rect x="195" y="238" width="130" height="8" rx="3" fill="url(#metalBlue)" stroke="#4D5F85" strokeWidth="1.2" />
+                    <rect x="195" y="246" width="130" height="75" rx="8" fill="url(#ptfeWhite)" stroke="#bbb5a5" strokeWidth="1.5" />
+                    <rect x="215" y="256" width="90" height="55" rx="5" fill="#e8e2d6" stroke="#ccc5b5" strokeWidth="1" />
+                    <rect x="195" y="318" width="130" height="8" rx="3" fill="url(#metalBlue)" stroke="#4D5F85" strokeWidth="1.2" />
+                    <circle cx="203" cy="242" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="317" cy="242" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="203" cy="322" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="317" cy="322" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <line x1="240" y1="268" x2="240" y2="298" stroke="#ccc" strokeWidth="1.5" />
+                    <line x1="260" y1="263" x2="260" y2="303" stroke="#ccc" strokeWidth="1.5" />
+                    <line x1="280" y1="268" x2="280" y2="298" stroke="#ccc" strokeWidth="1.5" />
+                    <circle cx="260" cy="283" r="10" fill="none" stroke="#ddd" strokeWidth="0.8" strokeDasharray="3 2" />
+                    <g className="reactor-label">
+                        <line x1="325" y1="283" x2="400" y2="283" className="reactor-leader" />
+                        <rect x="400" y="273" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="407" y="287" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">PTFE BODY</text>
+                    </g>
+                </g>
+
+                {/* ===== 3. FLUIDIC PORTS ===== */}
+                <g className="reactor-part part-ports">
+                    <rect x="190" y="205" width="18" height="34" rx="5" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1.2" />
+                    <ellipse cx="199" cy="205" rx="9" ry="4.5" fill="#9CCC65" stroke="#558B2F" strokeWidth="1" />
+                    <circle cx="199" cy="205" r="3.5" fill="#444" />
+                    <rect x="312" y="205" width="18" height="34" rx="5" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1.2" />
+                    <ellipse cx="321" cy="205" rx="9" ry="4.5" fill="#9CCC65" stroke="#558B2F" strokeWidth="1" />
+                    <circle cx="321" cy="205" r="3.5" fill="#444" />
+                    <rect x="240" y="200" width="18" height="38" rx="5" fill="url(#greenAccent)" stroke="#558B2F" strokeWidth="1.2" />
+                    <ellipse cx="249" cy="200" rx="9" ry="4.5" fill="#9CCC65" stroke="#558B2F" strokeWidth="1" />
+                    <circle cx="249" cy="200" r="3.5" fill="#444" />
+                    <g className="reactor-label">
+                        <line x1="190" y1="218" x2="105" y2="218" className="reactor-leader" />
+                        <rect x="20" y="208" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="27" y="222" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">FLUID PORTS</text>
+                    </g>
+                </g>
+
+                {/* ===== 2. GLASS / STAINLESS STEEL WINDOW ===== */}
+                <g className="reactor-part part-window">
+                    <rect x="195" y="178" width="130" height="28" rx="6" fill="url(#metalBlue)" stroke="#4D5F85" strokeWidth="1.5" />
+                    <rect x="215" y="183" width="90" height="18" rx="4" fill="url(#windowGlass)" stroke="#8BA0C0" strokeWidth="1" />
+                    <line x1="225" y1="186" x2="235" y2="198" stroke="rgba(255,255,255,0.5)" strokeWidth="1.5" strokeLinecap="round" />
+                    <line x1="250" y1="186" x2="260" y2="198" stroke="rgba(255,255,255,0.3)" strokeWidth="1" strokeLinecap="round" />
+                    <line x1="275" y1="187" x2="282" y2="196" stroke="rgba(255,255,255,0.25)" strokeWidth="0.8" strokeLinecap="round" />
+                    <circle cx="203" cy="192" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="317" cy="192" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <g className="reactor-label">
+                        <line x1="195" y1="192" x2="105" y2="172" className="reactor-leader" />
+                        <rect x="20" y="162" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="27" y="176" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">SS WINDOW</text>
+                    </g>
+                </g>
+
+                {/* ===== 1. STAINLESS STEEL COVER (top) ===== */}
+                <g className="reactor-part part-cover">
+                    <rect x="195" y="132" width="130" height="44" rx="8" fill="url(#metalBlue)" stroke="#4D5F85" strokeWidth="1.5" />
+                    <rect x="200" y="137" width="120" height="6" rx="2" fill="rgba(255,255,255,0.15)" />
+                    <rect x="183" y="142" width="16" height="24" rx="3" fill="url(#metalLight)" stroke="#7888A0" strokeWidth="1" />
+                    <circle cx="191" cy="149" r="2" fill="#555" />
+                    <circle cx="191" cy="160" r="2" fill="#555" />
+                    <rect x="321" y="142" width="16" height="24" rx="3" fill="url(#metalLight)" stroke="#7888A0" strokeWidth="1" />
+                    <circle cx="329" cy="149" r="2" fill="#555" />
+                    <circle cx="329" cy="160" r="2" fill="#555" />
+                    <circle cx="260" cy="154" r="12" fill="url(#metalLight)" stroke="#7888A0" strokeWidth="1.5" />
+                    <circle cx="260" cy="154" r="6" fill="#8A9AB5" />
+                    <circle cx="260" cy="154" r="2.5" fill="#555" />
+                    <path d="M 245 132 Q 245 118 260 118 Q 275 118 275 132" fill="none" stroke="#7888A0" strokeWidth="3.5" strokeLinecap="round" />
+                    <circle cx="208" cy="168" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="230" cy="168" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="290" cy="168" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <circle cx="312" cy="168" r="2.5" fill="#3D4F75" stroke="#2D3F65" strokeWidth="0.6" />
+                    <g className="reactor-label">
+                        <line x1="195" y1="148" x2="105" y2="125" className="reactor-leader" />
+                        <rect x="20" y="115" width="85" height="20" rx="3" fill="#FAF8F5" stroke="#1A1829" strokeWidth="0.8" />
+                        <text x="27" y="129" fontSize="9" fontFamily="'DM Mono', monospace" fill="#1A1829" fontWeight="500">SS COVER</text>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+);
+
 
 // --- B. HERO SECTION ---
 const Hero = () => {
@@ -419,10 +624,10 @@ const WorkCard = ({ project, index }) => {
             <div className={`lg:col-span-5 ${isEven ? 'lg:order-2' : 'lg:order-1'} p-2`} data-cursor="hover">
                 <div className="font-data text-[#FF6B4A] text-[9px] md:text-[10px] tracking-widest uppercase mb-3">{project.context}</div>
                 <h3 className="font-heading font-semibold text-2xl md:text-3xl text-[#1A1829] mb-4 tracking-tight">{project.title}</h3>
-                <p className="font-outfit text-[#1A1829]/70 text-[0.85rem] md:text-sm leading-relaxed mb-6">{project.desc}</p>
+                <p className="font-outfit text-[#1A1829]/70 text-base md:text-[1.05rem] leading-relaxed mb-6">{project.desc}</p>
 
                 <div className="bg-[#FAF8F5] border-l-4 border-[#FF6B4A] p-4 rounded-r-2xl shadow-sm">
-                    <p className="font-outfit italic text-[#1A1829] font-medium leading-relaxed text-xs md:text-[13px]">
+                    <p className="font-outfit italic text-[#1A1829] font-medium leading-relaxed text-sm md:text-[0.95rem]">
                         "{project.outcome}"
                     </p>
                 </div>
