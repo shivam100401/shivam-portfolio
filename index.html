@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=MuseoModerno:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=MuseoModerno:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- Tailwind CSS (Play CDN for buildless) -->
@@ -30,6 +30,7 @@
                         heading: ['"MuseoModerno"', 'sans-serif'],
                         sans: ['"Inter"', 'sans-serif'],
                         data: ['"DM Mono"', 'monospace'],
+                        outfit: ['"Outfit"', 'sans-serif'],
                     },
                     animation: {
                         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -54,6 +55,16 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            cursor: none;
+        }
+
+        a,
+        button,
+        [role="button"],
+        input,
+        select,
+        textarea {
+            cursor: none !important;
         }
 
         /* Soft Grain Overlay for Retro Vibe */
@@ -82,6 +93,116 @@
             opacity: 0.15;
             border-radius: 50%;
             pointer-events: none;
+        }
+
+        /* The Custom Polymorphic Cursor */
+        #cursor-dot,
+        #cursor-shell {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+        }
+
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #1A1829;
+            border-radius: 50%;
+            transition: opacity 0.2s;
+        }
+
+        #cursor-shell {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 1.5px solid rgba(26, 24, 41, 0.2);
+            border-radius: 50%;
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                height 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+                background-color 0.4s, border-radius 0.4s, border-color 0.4s;
+            overflow: hidden;
+            font-family: 'DM Mono', monospace;
+            font-weight: 500;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #FAF8F5;
+            white-space: nowrap;
+        }
+
+        /* Cursor States */
+        body.cursor-hover #cursor-shell {
+            width: 54px;
+            height: 54px;
+            background-color: rgba(26, 24, 41, 0.05);
+            border-color: rgba(26, 24, 41, 0.4);
+            backdrop-filter: blur(2px);
+        }
+
+        body.cursor-magnetic #cursor-shell {
+            width: 80px;
+            height: 80px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-color: transparent;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        body.cursor-magnetic #cursor-dot {
+            opacity: 0;
+        }
+
+        body.cursor-read #cursor-shell {
+            width: 90px;
+            height: 36px;
+            border-radius: 18px;
+            background-color: #FF6B4A;
+            border-color: transparent;
+            box-shadow: 0 4px 15px rgba(255, 107, 74, 0.4);
+        }
+
+        body.cursor-read #cursor-shell::after {
+            content: "View";
+        }
+
+        body.cursor-read #cursor-dot {
+            opacity: 0;
+        }
+
+        body.cursor-bracket #cursor-shell {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            border: 2px solid #4A90E2;
+            background-color: transparent;
+            border-top: none;
+            border-bottom: none;
+        }
+
+        body.cursor-bracket #cursor-dot {
+            background-color: #4A90E2;
+        }
+
+        body.cursor-mail #cursor-shell {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #FF6B4A;
+            border-color: transparent;
+            box-shadow: 0 10px 25px rgba(255, 107, 74, 0.3);
+        }
+
+        body.cursor-mail #cursor-shell::after {
+            content: "Email";
+        }
+
+        body.cursor-mail #cursor-dot {
+            opacity: 0;
         }
     </style>
 

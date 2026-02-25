@@ -8,9 +8,9 @@ const JOB_TITLE = "Chemical Engineering Student";
 const IDENTITY_LINE = "Engineering sustainable materials and systems.";
 
 const BIO_PARAGRAPHS = [
-    "I'm a Chemical Engineering student at Toronto Metropolitan University with a deep passion for sustainable technology, battery systems, and engineering materials. I thrive on diving into complex processes—whether it's running simulations to optimize reactor yields or exploring the bioleaching of critical metals.",
-    "During my time at Multimatic Inc., I got hands-on experience controlling parameters for industrial-scale systems. The most valuable lesson I learned wasn't just how to maintain a chemical bath; it was how to communicate technical deviations clearly so production keeps moving.",
-    "Right now, I'm actively looking for opportunities where I can apply my skills in process simulation, material science, and strategic problem-solving to build cleaner, more efficient technologies for the future."
+    "I'm a Chemical Engineering student at Toronto Metropolitan University with a deep passion for sustainable technology, battery systems, and engineering materials. I thrive on diving into complex processes whether it's running simulations to optimize reactor yields or exploring the bioleaching of critical metals.",
+    "During my time at Multimatic Inc., I got hands on experience controlling parameters for industrial scale systems. The most valuable lesson I learned wasn't just how to maintain a chemical bath; it was how to communicate technical deviations clearly so production keeps moving.",
+    "Right now, I'm actively looking for opportunities where I can apply my skills in process simulation, material science, and strategic problem solving to build cleaner, more efficient technologies for the future."
 ];
 
 const SKILL_CATEGORIES = [
@@ -36,7 +36,7 @@ const PROJECTS = [
     {
         title: "Lithium Recovery Capstone",
         context: "Biohydrometallurgical Bioleaching Research",
-        desc: "My ongoing capstone project focuses on extracting critical battery materials—specifically Lithium—using sustainable, biological methods rather than highly toxic traditional mining practices. This involves cultivating specific microbial strains and monitoring leaching kinetics.",
+        desc: "My ongoing capstone project focuses on extracting critical battery materials specifically Lithium using sustainable, biological methods rather than highly toxic traditional mining practices. This involves cultivating specific microbial strains and monitoring leaching kinetics.",
         outcome: "Aiming to establish a viable, low-heat, low-emission pathway for critical mineral recovery.",
         img: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=2670&auto=format&fit=crop" // Lab/Microscope texture
     },
@@ -58,6 +58,54 @@ const THEME = {
     surface: '#Fdfcfb',
 };
 
+
+// --- Custom Hooks ---
+const usePolymorphicCursor = () => {
+    useEffect(() => {
+        const dot = document.getElementById('cursor-dot');
+        const shell = document.getElementById('cursor-shell');
+        if (!dot || !shell) return;
+
+        const setDotX = gsap.quickTo(dot, "left", { duration: 0.1, ease: "power3" });
+        const setDotY = gsap.quickTo(dot, "top", { duration: 0.1, ease: "power3" });
+        const setShellX = gsap.quickTo(shell, "left", { duration: 0.4, ease: "power3" });
+        const setShellY = gsap.quickTo(shell, "top", { duration: 0.4, ease: "power3" });
+
+        const onMouseMove = (e) => {
+            setDotX(e.clientX);
+            setDotY(e.clientY);
+            setShellX(e.clientX);
+            setShellY(e.clientY);
+        };
+
+        window.addEventListener("mousemove", onMouseMove);
+
+        const handleMouseEnter = (e) => {
+            const type = e.currentTarget.getAttribute('data-cursor') || 'hover';
+            document.body.className = `cursor-${type}`;
+        };
+        const handleMouseLeave = () => {
+            document.body.className = '';
+        };
+
+        const attachCursorEvents = () => {
+            document.querySelectorAll('[data-cursor]').forEach(el => {
+                el.addEventListener('mouseenter', handleMouseEnter);
+                el.addEventListener('mouseleave', handleMouseLeave);
+            });
+        };
+
+        setTimeout(attachCursorEvents, 500);
+
+        return () => {
+            window.removeEventListener("mousemove", onMouseMove);
+            document.querySelectorAll('[data-cursor]').forEach(el => {
+                el.removeEventListener('mouseenter', handleMouseEnter);
+                el.removeEventListener('mouseleave', handleMouseLeave);
+            });
+        };
+    }, []);
+};
 
 // ===== COMPONENTS =====
 
@@ -115,6 +163,13 @@ const Hero = () => {
                 duration: 1,
                 ease: "power3.out"
             }, "-=0.6")
+                .from(".reveal-bento", {
+                    y: 40,
+                    opacity: 0,
+                    duration: 1.2,
+                    stagger: 0.15,
+                    ease: "power3.out"
+                }, "-=1")
                 .from(".glow-blob", {
                     scale: 0.8,
                     opacity: 0,
@@ -127,42 +182,70 @@ const Hero = () => {
     }, []);
 
     return (
-        <section ref={comp} className="relative min-h-[100dvh] w-full overflow-hidden flex flex-col justify-center items-start pb-24 px-6 md:px-16 lg:px-24 bg-[#FAF8F5]">
+        <section ref={comp} className="relative min-h-[100dvh] w-full overflow-hidden flex flex-col justify-center items-center pb-24 px-6 md:px-16 lg:px-24 bg-[#FAF8F5]">
 
             {/* Retrofuturistic Soft Background Globs */}
             <div className="glow-blob bg-[#FF6B4A] w-[400px] h-[400px] top-[-100px] right-[-100px] animate-pulse-slow"></div>
             <div className="glow-blob bg-[#4A90E2] w-[500px] h-[500px] bottom-[-200px] left-[-100px]" style={{ animation: 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite alternate' }}></div>
 
-            <div className="relative z-10 max-w-5xl text-[#1A1829] mt-20">
-                <h1 className="leading-[1.1] mb-8">
-                    <div className="overflow-hidden mb-6">
-                        <span className="reveal-text inline-block font-data text-xs md:text-sm tracking-[0.2em] uppercase text-[#1A1829] bg-white/70 backdrop-blur-md px-4 py-2 border border-[#1A1829]/10 rounded-full shadow-sm">
-                            {JOB_TITLE}
-                        </span>
-                    </div>
-                    <div className="overflow-hidden">
-                        <span className="reveal-text block font-heading font-bold text-6xl md:text-[7rem] tracking-tight mb-4 text-[#1A1829] drop-shadow-sm">{BRAND_NAME}</span>
-                    </div>
-                    <div className="overflow-hidden">
-                        <span className="reveal-text block font-heading font-medium text-4xl md:text-6xl text-[#FF6B4A] pr-4 max-w-4xl">{IDENTITY_LINE}</span>
-                    </div>
-                </h1>
-
-                <div className="hero-cta flex gap-4 mt-12">
-                    <a href="#contact" className="bg-[#FF6B4A] text-[#FAF8F5] px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide magnetic-btn relative overflow-hidden group shadow-[0_8px_20px_rgba(255,107,74,0.3)] inline-flex items-center gap-2">
-                        <span className="relative z-10">Start a Conversation</span>
-                        <div className="absolute inset-0 bg-[#1A1829] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0 flex items-center justify-center font-semibold">
-                            <span className="flex items-center gap-2 text-[#FAF8F5]">Start a Conversation</span>
+            <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center mt-20">
+                <div className="lg:col-span-7 text-[#1A1829]">
+                    <h1 className="leading-[1.1] mb-8">
+                        <div className="overflow-hidden mb-6">
+                            <span data-cursor="hover" className="reveal-text inline-block font-data text-xs md:text-sm tracking-[0.2em] uppercase text-[#1A1829] bg-white/70 backdrop-blur-md px-4 py-2 border border-[#1A1829]/10 rounded-full shadow-sm">
+                                {JOB_TITLE}
+                            </span>
                         </div>
-                    </a>
-                    <a href="#about" className="bg-white/50 backdrop-blur-sm border border-[#1A1829]/10 text-[#1A1829] px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide magnetic-btn hover:bg-white transition-colors">
-                        Learn More
-                    </a>
+                        <div className="overflow-hidden">
+                            <span data-cursor="hover" className="reveal-text block font-heading font-bold text-6xl md:text-[6.5rem] tracking-tight mb-4 text-[#1A1829] drop-shadow-sm">{BRAND_NAME}</span>
+                        </div>
+                        <div className="overflow-hidden">
+                            <span data-cursor="hover" className="reveal-text block font-heading font-medium text-4xl md:text-5xl text-[#FF6B4A] pr-4 max-w-3xl leading-tight">{IDENTITY_LINE}</span>
+                        </div>
+                    </h1>
+
+                    <div className="hero-cta flex flex-wrap gap-4 mt-12">
+                        <a href="#contact" data-cursor="magnetic" className="bg-[#FF6B4A] text-[#FAF8F5] px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide magnetic-btn relative overflow-hidden group shadow-[0_8px_20px_rgba(255,107,74,0.3)] inline-flex items-center gap-2">
+                            <span className="relative z-10">Start a Conversation</span>
+                            <div className="absolute inset-0 bg-[#1A1829] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0 flex items-center justify-center font-semibold">
+                                <span className="flex items-center gap-2 text-[#FAF8F5]">Start a Conversation</span>
+                            </div>
+                        </a>
+                        <a href="#about" data-cursor="hover" className="bg-white/50 backdrop-blur-sm border border-[#1A1829]/10 text-[#1A1829] px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide magnetic-btn hover:bg-white transition-colors">
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+
+                {/* Right-Side Bento Box */}
+                <div className="lg:col-span-5 grid grid-cols-2 gap-4">
+                    <div className="reveal-bento col-span-2 aspect-[16/7] bg-white/60 backdrop-blur-md rounded-[2rem] p-8 border border-[#1A1829]/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all flex flex-col justify-between group" data-cursor="bracket">
+                        <div className="flex justify-between items-start">
+                            <span className="font-data text-[10px] uppercase tracking-[0.2em] text-[#FF6B4A] font-bold">System Status</span>
+                            <div className="w-2 h-2 rounded-full bg-green-500 animate-[pulse_2s_infinite]"></div>
+                        </div>
+                        <div className="text-2xl md:text-3xl font-heading font-medium text-[#1A1829] leading-tight group-hover:text-[#4A90E2] transition-colors">
+                            Engineering robust solutions for sustainable industry.
+                        </div>
+                    </div>
+
+                    <div className="reveal-bento aspect-square bg-[#1A1829] rounded-[2rem] p-6 flex flex-col items-center justify-center text-white relative overflow-hidden group" data-cursor="hover">
+                        <div className="absolute inset-0 bg-[#FF6B4A]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <i data-lucide="droplet" className="w-10 h-10 text-[#FF6B4A] mb-4 group-hover:scale-110 transition-transform"></i>
+                        <span className="font-sans text-sm font-medium">Fluid Dynamics</span>
+                    </div>
+
+                    <div className="reveal-bento aspect-square bg-[#FAF8F5] rounded-[2rem] p-6 border border-[#1A1829]/5 shadow-sm flex flex-col items-center justify-center gap-4 group" data-cursor="read">
+                        <div className="w-16 h-16 rounded-full border border-[#4A90E2] flex items-center justify-center group-hover:bg-[#4A90E2] group-hover:text-white transition-colors duration-500 text-[#4A90E2]">
+                            <i data-lucide="cpu" className="w-6 h-6"></i>
+                        </div>
+                        <span className="font-data text-[10px] text-[#1A1829]/60 uppercase tracking-widest text-center">Material<br />Science</span>
+                    </div>
                 </div>
             </div>
 
             {/* Scroll Indicator */}
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50 flex flex-col items-center gap-2">
+            <div data-cursor="hover" className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce flex flex-col items-center gap-2 mix-blend-multiply opacity-50 relative z-20">
                 <span className="font-data text-[10px] tracking-widest uppercase text-[#1A1829]">Scroll</span>
                 <i data-lucide="arrow-down" className="w-4 h-4 text-[#1A1829]"></i>
             </div>
@@ -213,7 +296,7 @@ const About = () => {
 
                 <div className="lg:col-span-7 relative z-10">
                     <h2 className="about-text font-heading font-medium text-4xl md:text-5xl text-[#1A1829] mb-8">The Human Behind the Work</h2>
-                    <div className="space-y-6 text-[#1A1829]/70 font-sans text-lg leading-relaxed mb-12">
+                    <div className="space-y-6 text-[#1A1829]/95 font-outfit text-2xl md:text-[1.7rem] font-light leading-[1.6] tracking-wide mb-12" data-cursor="hover">
                         {BIO_PARAGRAPHS.map((p, i) => <p key={i} className="about-text">{p}</p>)}
                     </div>
 
@@ -482,6 +565,8 @@ const App = () => {
             window.lucide.createIcons();
         }
     }, []);
+
+    usePolymorphicCursor();
 
     return (
         <div className="min-h-screen">
