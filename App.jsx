@@ -17,7 +17,7 @@ const SKILL_CATEGORIES = [
     {
         category: "Process Simulation & Modeling",
         skills: [
-            { name: "Aspen Plus / HYSYS", desc: "Rigorous steady-state and dynamic process simulation." },
+            { name: "Aspen Plus / HYSYS", desc: "Rigorous steady state and dynamic process simulation." },
             { name: "MATLAB & Simulink", desc: "Mathematical modeling, data analysis, and control systems." },
             { name: "SolidWorks", desc: "3D CAD modeling and structural component design." }
         ]
@@ -43,7 +43,7 @@ const PROJECTS = [
     {
         title: "Multimatic Inc. Co-op",
         context: "E-Coat Department Engineering Intern",
-        desc: "Supported the electrocoating operations at a Tier-1 automotive supplier. Responsible for monitoring chemical tank parameters, optimizing bath conditions, and identifying process deviations before they impacted production quality.",
+        desc: "Supported the electrocoating operations at a Tier 1 automotive supplier. Responsible for monitoring chemical tank parameters, optimizing bath conditions, and identifying process deviations before they impacted production quality.",
         outcome: "Enhanced coating consistency and reduced chemical waste by implementing tighter parameter controls.",
         img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop" // Industrial machinery
     }
@@ -143,6 +143,102 @@ const Navbar = () => {
     );
 };
 
+const ExplodingCADWidget = () => (
+    <div className="reveal-bento aspect-[5/4] sm:aspect-square bg-[#FAF8F5] rounded-[2rem] border border-[#1A1829]/5 shadow-sm flex flex-col items-center justify-center relative group overflow-hidden" data-cursor="bracket">
+
+        <div className="absolute top-4 left-4 z-10 pointer-events-none">
+            <span className="font-data text-[8px] md:text-[9px] uppercase tracking-[0.2em] text-[#1A1829]/40 font-bold mb-1 block">CAD Viewer</span>
+            <span className="font-sans text-[8px] md:text-[9px] text-[#1A1829]/80 font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">Hover to explode</span>
+        </div>
+
+        <div className="relative w-full h-[120%] flex items-center justify-center pointer-events-none mt-2 translate-y-2">
+            <svg viewBox="0 0 400 300" className="w-[140%] h-[140%] max-w-[400px] drop-shadow-md overflow-visible relative -left-[10%]">
+                <style>
+                    {`
+                        .cad-part { transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.5s ease; opacity: 0.95; }
+                        .cad-label { opacity: 0; transition: opacity 0.4s ease 0.3s; pointer-events: none; }
+                        .cad-line { opacity: 0; transition: opacity 0.4s ease 0.2s, stroke 0.4s; stroke: #4A90E2; stroke-width: 1; stroke-dasharray: 4,4; }
+                        
+                        .group:hover .cad-part { opacity: 1; filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.15)); }
+                        .group:hover .cad-label { opacity: 1; }
+                        .group:hover .cad-line { opacity: 0.5; }
+                        
+                        .group:hover .part-shaft { transform: translate(-35px, 17px); }
+                        .group:hover .part-endplate { transform: translate(-10px, 5px); }
+                        .group:hover .part-rotor { transform: translate(15px, -7px) scale(0.95); }
+                        .group:hover .part-stator { transform: translate(45px, -22px); }
+                        .group:hover .part-handle { transform: translate(80px, -40px); }
+                    `}
+                </style>
+
+                <line x1="80" y1="180" x2="320" y2="60" className="cad-line" />
+
+                {/* 1. HANDLE */}
+                <g className="cad-part part-handle">
+                    <path d="M 230 110 Q 280 60 320 80 Q 320 140 280 180 Q 250 160 230 110 Z" fill="#2D3A70" stroke="#1A1829" strokeWidth="2" strokeLinejoin="round" />
+                    <path d="M 260 125 Q 280 100 295 110 Q 295 130 280 145 Q 265 130 260 125 Z" fill="#FAF8F5" />
+                    <g className="cad-label">
+                        <line x1="280" y1="70" x2="310" y2="40" stroke="#1A1829" strokeWidth="1" />
+                        <rect x="310" y="28" width="50" height="15" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1" />
+                        <text x="314" y="38" fontSize="8" fontFamily="monospace" fill="#1A1829">HANDLE</text>
+                    </g>
+                </g>
+
+                {/* 2. STATOR */}
+                <g className="cad-part part-stator">
+                    <path d="M 180 100 Q 220 70 240 100 Q 230 160 190 150 Q 160 140 180 100 Z" fill="#4B5E65" stroke="#1A1829" strokeWidth="2" strokeLinejoin="round" />
+                    <path d="M 175 80 Q 185 60 210 70" fill="none" stroke="#1A1829" strokeWidth="4" />
+                    <path d="M 195 160 Q 210 180 235 160" fill="none" stroke="#1A1829" strokeWidth="4" />
+                    <g className="cad-label">
+                        <line x1="200" y1="70" x2="210" y2="30" stroke="#1A1829" strokeWidth="1" />
+                        <rect x="180" y="15" width="85" height="15" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1" />
+                        <text x="184" y="25" fontSize="8" fontFamily="monospace" fill="#1A1829">STATOR_WINDINGS</text>
+                    </g>
+                </g>
+
+                {/* 3. ROTOR */}
+                <g className="cad-part part-rotor">
+                    <path d="M 150 110 L 160 90 L 175 105 Z" fill="#4A90E2" stroke="#1A1829" strokeWidth="1.5" strokeLinejoin="round" />
+                    <path d="M 155 130 L 150 150 L 170 145 Z" fill="#4A90E2" stroke="#1A1829" strokeWidth="1.5" strokeLinejoin="round" />
+                    <path d="M 170 115 L 190 100 L 195 120 Z" fill="#4A90E2" stroke="#1A1829" strokeWidth="1.5" strokeLinejoin="round" />
+                    <path d="M 165 140 L 190 155 L 185 135 Z" fill="#4A90E2" stroke="#1A1829" strokeWidth="1.5" strokeLinejoin="round" />
+                    <circle cx="170" cy="125" r="12" fill="#FAF8F5" stroke="#1A1829" strokeWidth="2" />
+                    <circle cx="170" cy="125" r="4" fill="#1A1829" />
+                    <g className="cad-label">
+                        <line x1="170" y1="105" x2="160" y2="70" stroke="#1A1829" strokeWidth="1" />
+                        <rect x="125" y="55" width="60" height="15" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1" />
+                        <text x="129" y="65" fontSize="8" fontFamily="monospace" fill="#1A1829">ROTOR_FAN</text>
+                    </g>
+                </g>
+
+                {/* 4. ENDPLATE */}
+                <g className="cad-part part-endplate">
+                    <path d="M 110 130 Q 130 90 150 115 Q 160 150 130 160 Q 100 150 110 130 Z" fill="#E6C84C" stroke="#1A1829" strokeWidth="2" strokeLinejoin="round" />
+                    <circle cx="135" cy="130" r="8" fill="#FAF8F5" stroke="#1A1829" strokeWidth="2" />
+                    <path d="M 105 135 L 115 130" stroke="#1A1829" strokeWidth="2" />
+                    <g className="cad-label">
+                        <line x1="120" y1="100" x2="110" y2="60" stroke="#1A1829" strokeWidth="1" />
+                        <rect x="50" y="45" width="80" height="15" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1" />
+                        <text x="54" y="55" fontSize="8" fontFamily="monospace" fill="#1A1829">MOTOR_ENDPLATE</text>
+                    </g>
+                </g>
+
+                {/* 5. SHAFT */}
+                <g className="cad-part part-shaft">
+                    <path d="M 50 170 L 130 130 L 135 140 L 55 180 Z" fill="#889CBA" stroke="#1A1829" strokeWidth="2" strokeLinejoin="round" />
+                    <rect x="70" y="145" width="8" height="20" transform="rotate(-26.5, 74, 155)" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1.5" />
+                    <rect x="100" y="130" width="10" height="25" transform="rotate(-26.5, 105, 142)" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1.5" />
+                    <g className="cad-label">
+                        <line x1="70" y1="150" x2="60" y2="120" stroke="#1A1829" strokeWidth="1" />
+                        <rect x="25" y="105" width="40" height="15" fill="#FAF8F5" stroke="#1A1829" strokeWidth="1" />
+                        <text x="29" y="115" fontSize="8" fontFamily="monospace" fill="#1A1829">SHAFT</text>
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+);
+
 // --- B. HERO SECTION ---
 const Hero = () => {
     const comp = useRef();
@@ -190,28 +286,28 @@ const Hero = () => {
 
             <div className="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center mt-20">
                 <div className="lg:col-span-7 text-[#1A1829]">
-                    <h1 className="leading-[1.1] mb-8">
+                    <h1 className="leading-[1.1] mb-8" data-cursor="hover">
                         <div className="overflow-hidden mb-6">
-                            <span data-cursor="hover" className="reveal-text inline-block font-data text-xs md:text-sm tracking-[0.2em] uppercase text-[#1A1829] bg-white/70 backdrop-blur-md px-4 py-2 border border-[#1A1829]/10 rounded-full shadow-sm">
+                            <span data-cursor="hover" className="reveal-text inline-block font-data text-[10px] md:text-[11px] tracking-[0.2em] uppercase text-[#1A1829] bg-white/70 backdrop-blur-md px-3 py-1.5 border border-[#1A1829]/10 rounded-full shadow-sm">
                                 {JOB_TITLE}
                             </span>
                         </div>
                         <div className="overflow-hidden">
-                            <span data-cursor="hover" className="reveal-text block font-heading font-bold text-6xl md:text-[6.5rem] tracking-tight mb-4 text-[#1A1829] drop-shadow-sm">{BRAND_NAME}</span>
+                            <span data-cursor="hover" className="reveal-text block font-heading font-bold text-5xl md:text-6xl tracking-tight mb-4 text-[#1A1829] drop-shadow-sm">{BRAND_NAME}</span>
                         </div>
                         <div className="overflow-hidden">
-                            <span data-cursor="hover" className="reveal-text block font-heading font-medium text-4xl md:text-5xl text-[#FF6B4A] pr-4 max-w-3xl leading-tight">{IDENTITY_LINE}</span>
+                            <span data-cursor="hover" className="reveal-text block font-heading font-medium text-3xl md:text-4xl text-[#FF6B4A] pr-4 max-w-2xl leading-tight">{IDENTITY_LINE}</span>
                         </div>
                     </h1>
 
-                    <div className="hero-cta flex flex-wrap gap-4 mt-12">
-                        <a href="#contact" data-cursor="magnetic" className="bg-[#FF6B4A] text-[#FAF8F5] px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide magnetic-btn relative overflow-hidden group shadow-[0_8px_20px_rgba(255,107,74,0.3)] inline-flex items-center gap-2">
+                    <div className="hero-cta flex flex-wrap gap-4 mt-8">
+                        <a href="#contact" data-cursor="magnetic" className="bg-[#FF6B4A] text-[#FAF8F5] px-6 py-3 rounded-full font-sans font-semibold text-[13px] tracking-wide magnetic-btn relative overflow-hidden group shadow-[0_8px_20px_rgba(255,107,74,0.3)] inline-flex items-center gap-2">
                             <span className="relative z-10">Start a Conversation</span>
                             <div className="absolute inset-0 bg-[#1A1829] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0 flex items-center justify-center font-semibold">
-                                <span className="flex items-center gap-2 text-[#FAF8F5]">Start a Conversation</span>
+                                <span className="flex items-center gap-2 text-[#FAF8F5] text-[13px]">Start a Conversation</span>
                             </div>
                         </a>
-                        <a href="#about" data-cursor="hover" className="bg-white/50 backdrop-blur-sm border border-[#1A1829]/10 text-[#1A1829] px-8 py-4 rounded-full font-sans font-semibold text-sm tracking-wide magnetic-btn hover:bg-white transition-colors">
+                        <a href="#about" data-cursor="hover" className="bg-white/50 backdrop-blur-sm border border-[#1A1829]/10 text-[#1A1829] px-6 py-3 rounded-full font-sans font-semibold text-[13px] tracking-wide magnetic-btn hover:bg-white transition-colors">
                             Learn More
                         </a>
                     </div>
@@ -219,28 +315,23 @@ const Hero = () => {
 
                 {/* Right-Side Bento Box */}
                 <div className="lg:col-span-5 grid grid-cols-2 gap-4">
-                    <div className="reveal-bento col-span-2 aspect-[16/7] bg-white/60 backdrop-blur-md rounded-[2rem] p-8 border border-[#1A1829]/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all flex flex-col justify-between group" data-cursor="bracket">
+                    <div className="reveal-bento col-span-2 aspect-[16/7] bg-white/60 backdrop-blur-md rounded-[2rem] p-6 border border-[#1A1829]/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgb(0,0,0,0.08)] transition-all flex flex-col justify-between group" data-cursor="bracket">
                         <div className="flex justify-between items-start">
-                            <span className="font-data text-[10px] uppercase tracking-[0.2em] text-[#FF6B4A] font-bold">System Status</span>
+                            <span className="font-data text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-[#FF6B4A] font-bold">System Status</span>
                             <div className="w-2 h-2 rounded-full bg-green-500 animate-[pulse_2s_infinite]"></div>
                         </div>
-                        <div className="text-2xl md:text-3xl font-heading font-medium text-[#1A1829] leading-tight group-hover:text-[#4A90E2] transition-colors">
+                        <div className="text-xl md:text-2xl font-heading font-medium text-[#1A1829] leading-tight group-hover:text-[#4A90E2] transition-colors" data-cursor="hover">
                             Engineering robust solutions for sustainable industry.
                         </div>
                     </div>
 
-                    <div className="reveal-bento aspect-square bg-[#1A1829] rounded-[2rem] p-6 flex flex-col items-center justify-center text-white relative overflow-hidden group" data-cursor="hover">
+                    <div className="reveal-bento aspect-square bg-[#1A1829] rounded-[2rem] p-4 flex flex-col items-center justify-center text-white relative overflow-hidden group" data-cursor="hover">
                         <div className="absolute inset-0 bg-[#FF6B4A]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <i data-lucide="droplet" className="w-10 h-10 text-[#FF6B4A] mb-4 group-hover:scale-110 transition-transform"></i>
-                        <span className="font-sans text-sm font-medium">Fluid Dynamics</span>
+                        <i data-lucide="droplet" className="w-8 h-8 text-[#FF6B4A] mb-3 group-hover:scale-110 transition-transform"></i>
+                        <span className="font-sans text-xs md:text-sm font-medium">Fluid Dynamics</span>
                     </div>
 
-                    <div className="reveal-bento aspect-square bg-[#FAF8F5] rounded-[2rem] p-6 border border-[#1A1829]/5 shadow-sm flex flex-col items-center justify-center gap-4 group" data-cursor="read">
-                        <div className="w-16 h-16 rounded-full border border-[#4A90E2] flex items-center justify-center group-hover:bg-[#4A90E2] group-hover:text-white transition-colors duration-500 text-[#4A90E2]">
-                            <i data-lucide="cpu" className="w-6 h-6"></i>
-                        </div>
-                        <span className="font-data text-[10px] text-[#1A1829]/60 uppercase tracking-widest text-center">Material<br />Science</span>
-                    </div>
+                    <ExplodingCADWidget />
                 </div>
             </div>
 
@@ -294,20 +385,20 @@ const About = () => {
                     </div>
                 </div>
 
-                <div className="lg:col-span-7 relative z-10">
-                    <h2 className="about-text font-heading font-medium text-4xl md:text-5xl text-[#1A1829] mb-8">The Human Behind the Work</h2>
-                    <div className="space-y-6 text-[#1A1829]/95 font-outfit text-2xl md:text-[1.7rem] font-light leading-[1.6] tracking-wide mb-12" data-cursor="hover">
+                <div className="lg:col-span-7 relative z-10" data-cursor="hover">
+                    <h2 className="about-text font-heading font-medium text-3xl md:text-4xl text-[#1A1829] mb-6">The Human Behind the Work</h2>
+                    <div className="space-y-4 text-[#1A1829]/95 font-outfit text-xl md:text-2xl font-light leading-[1.6] tracking-wide mb-10" data-cursor="hover">
                         {BIO_PARAGRAPHS.map((p, i) => <p key={i} className="about-text">{p}</p>)}
                     </div>
 
-                    <div className="flex flex-wrap gap-4">
-                        <div className="about-chip bg-[#FAF8F5] border border-[#1A1829]/5 rounded-full px-6 py-3 flex items-center gap-3 shadow-sm">
+                    <div className="flex flex-wrap gap-3">
+                        <div className="about-chip bg-[#FAF8F5] border border-[#1A1829]/5 rounded-full px-5 py-2 flex items-center gap-3 shadow-sm" data-cursor="hover">
                             <i data-lucide="graduation-cap" className="w-4 h-4 text-[#FF6B4A]"></i>
-                            <span className="font-heading font-semibold text-sm text-[#1A1829]">Chemical Engineering</span>
+                            <span className="font-heading font-semibold text-xs md:text-sm text-[#1A1829]">Chemical Engineering</span>
                         </div>
-                        <div className="about-chip bg-[#FAF8F5] border border-[#1A1829]/5 rounded-full px-6 py-3 flex items-center gap-3 shadow-sm">
+                        <div className="about-chip bg-[#FAF8F5] border border-[#1A1829]/5 rounded-full px-5 py-2 flex items-center gap-3 shadow-sm" data-cursor="hover">
                             <i data-lucide="search" className="w-4 h-4 text-[#FF6B4A]"></i>
-                            <span className="font-data text-sm font-semibold text-[#1A1829]">Seeking Opportunities</span>
+                            <span className="font-data text-xs font-semibold text-[#1A1829]">Seeking Opportunities</span>
                         </div>
                     </div>
                 </div>
@@ -331,13 +422,13 @@ const WorkCard = ({ project, index }) => {
                 />
             </div>
 
-            <div className={`lg:col-span-5 ${isEven ? 'lg:order-2' : 'lg:order-1'} p-2`}>
-                <div className="font-data text-[#FF6B4A] text-xs tracking-widest uppercase mb-4">{project.context}</div>
-                <h3 className="font-heading font-semibold text-3xl md:text-4xl text-[#1A1829] mb-6 tracking-tight">{project.title}</h3>
-                <p className="font-sans text-[#1A1829]/70 text-[1.05rem] leading-relaxed mb-8">{project.desc}</p>
+            <div className={`lg:col-span-5 ${isEven ? 'lg:order-2' : 'lg:order-1'} p-2`} data-cursor="hover">
+                <div className="font-data text-[#FF6B4A] text-[9px] md:text-[10px] tracking-widest uppercase mb-3">{project.context}</div>
+                <h3 className="font-heading font-semibold text-2xl md:text-3xl text-[#1A1829] mb-4 tracking-tight">{project.title}</h3>
+                <p className="font-sans text-[#1A1829]/70 text-[0.85rem] md:text-sm leading-relaxed mb-6">{project.desc}</p>
 
-                <div className="bg-[#FAF8F5] border-l-4 border-[#FF6B4A] p-6 rounded-r-2xl shadow-sm">
-                    <p className="font-sans italic text-[#1A1829] font-medium leading-relaxed text-sm">
+                <div className="bg-[#FAF8F5] border-l-4 border-[#FF6B4A] p-4 rounded-r-2xl shadow-sm">
+                    <p className="font-sans italic text-[#1A1829] font-medium leading-relaxed text-xs md:text-[13px]">
                         "{project.outcome}"
                     </p>
                 </div>
@@ -370,9 +461,9 @@ const Work = () => {
     return (
         <section id="work" ref={sectionRef} className="py-24 px-6 md:px-16 lg:px-24 bg-[#FAF8F5]">
             <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-20">
-                    <h2 className="font-heading font-bold text-5xl md:text-6xl text-[#1A1829] mb-6">Selected Projects</h2>
-                    <p className="font-sans text-[#1A1829]/60 max-w-xl mx-auto text-lg">Applied engineering across battery technologies and broad industrial processes.</p>
+                <div className="text-center mb-16" data-cursor="hover">
+                    <h2 className="font-heading font-bold text-4xl md:text-5xl text-[#1A1829] mb-4">Selected Projects</h2>
+                    <p className="font-sans text-[#1A1829]/60 max-w-xl mx-auto text-sm md:text-[0.95rem]">Applied engineering across battery technologies and broad industrial processes.</p>
                 </div>
                 <div className="space-y-8 md:space-y-12">
                     {PROJECTS.map((p, i) => <WorkCard key={i} project={p} index={i} />)}
@@ -385,15 +476,15 @@ const Work = () => {
 // --- E. SKILLS & PHILOSOPHY ---
 const SkillChip = ({ skill }) => {
     return (
-        <div className="group relative h-[70px] w-full max-w-[320px] perspective-1000">
+        <div className="group relative h-[60px] w-full max-w-[320px] perspective-1000" data-cursor="hover">
             <div className="w-full h-full transition-all duration-500 transform-style-3d group-hover:rotate-y-180 cursor-default">
                 {/* Front */}
-                <div className="absolute inset-0 bg-white border border-[#1A1829]/10 rounded-[1.5rem] flex items-center justify-center shadow-sm backface-hidden group-hover:shadow-md transition-shadow">
-                    <span className="font-heading font-medium text-lg text-[#1A1829]">{skill.name}</span>
+                <div className="absolute inset-0 bg-white border border-[#1A1829]/10 rounded-2xl flex items-center justify-center shadow-sm backface-hidden group-hover:shadow-md transition-shadow">
+                    <span className="font-heading font-medium text-[0.95rem] text-[#1A1829]">{skill.name}</span>
                 </div>
                 {/* Back */}
-                <div className="absolute inset-0 bg-[#FF6B4A] rounded-[1.5rem] flex items-center justify-center p-4 backface-hidden rotate-y-180 shadow-lg text-white">
-                    <span className="font-sans text-sm text-center leading-tight font-medium">{skill.desc}</span>
+                <div className="absolute inset-0 bg-[#FF6B4A] rounded-2xl flex items-center justify-center p-3 backface-hidden rotate-y-180 shadow-lg text-white">
+                    <span className="font-sans text-[11px] text-center leading-tight font-medium">{skill.desc}</span>
                 </div>
             </div>
             {/* CSS Additions for 3D flip since Tailwind assumes custom classes for this */}
@@ -457,13 +548,33 @@ const SkillsAndPhilosophy = () => {
                         <p className="font-data text-[#FF6B4A] text-sm uppercase tracking-widest">Hover to expand</p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-4xl mx-auto">
-                        {SKILL_CATEGORIES.map((cat, i) => (
-                            <div key={i} className="skill-group flex flex-col items-center gap-4">
-                                <h4 className="font-data text-sm font-bold text-[#1A1829]/60 mb-4 uppercase tracking-wider">{cat.category}</h4>
-                                {cat.skills.map((skill, j) => <SkillChip key={j} skill={skill} />)}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                        <div data-cursor="hover">
+                            <h3 className="font-heading font-semibold text-xl md:text-2xl text-[#1A1829] mb-4">Core Competencies</h3>
+                            <div className="space-y-6">
+                                {SKILL_CATEGORIES.map((cat, i) => (
+                                    <div key={i}>
+                                        <h4 className="font-data text-[10px] uppercase tracking-widest text-[#FF6B4A] mb-3">{cat.category}</h4>
+                                        <div className="flex flex-col gap-3">
+                                            {cat.skills.map((s, idx) => <SkillChip key={idx} skill={s} />)}
+                                        </div>
+                                    </div>
+                                ))}
                             </div>
-                        ))}
+                        </div>
+
+                        <div className="bg-white/40 p-6 rounded-[2rem] border border-[#1A1829]/5" data-cursor="hover">
+                            <h3 className="font-heading font-semibold text-xl md:text-2xl text-[#1A1829] mb-4">Engineering Philosophy</h3>
+                            <div className="space-y-4 text-[#1A1829]/80 font-sans text-sm leading-relaxed">
+                                <p>
+                                    I believe the best engineers operate where the math meets the metal. It is not enough to simulate a perfect process; you have to understand the physical constraints of the hardware, the flow dynamics, and the operational realities of the plant floor.
+                                </p>
+                                <p>
+                                    Whether I am analyzing bioleaching kinetics to recover lithium, or monitoring electrocoating baths on a production line, my approach remains the same:
+                                    <strong> Isolate variables, model the ideal state, and engineer robust, sustainable pathways to achieve it.</strong>
+                                </p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -479,10 +590,10 @@ const SkillsAndPhilosophy = () => {
                 </div>
 
                 <div className="relative z-10 max-w-5xl mx-auto text-center px-4">
-                    <p className="phil-text font-sans text-xl md:text-2xl text-[#FAF8F5]/60 mb-8 max-w-2xl mx-auto">
+                    <p className="phil-text font-sans text-xl md:text-2xl text-[#FAF8F5]/60 mb-8 max-w-2xl mx-auto" data-cursor="hover">
                         Most approaches focus on: <span className="text-white">immediate short-term yields.</span>
                     </p>
-                    <h2 className="phil-text font-heading font-medium text-4xl md:text-6xl text-white leading-tight mb-8">
+                    <h2 className="phil-text font-heading font-medium text-4xl md:text-6xl text-white leading-tight mb-8" data-cursor="hover">
                         I focus on <span className="text-[#FF6B4A]">sustainable design</span><br />and long-term viability.
                     </h2>
                 </div>
@@ -496,37 +607,40 @@ const ContactAndFooter = () => {
     return (
         <div id="contact" className="relative bg-[#FAF8F5] pt-12">
             <section className="py-24 px-6 text-center max-w-4xl mx-auto">
-                <h2 className="font-heading font-bold text-5xl md:text-7xl text-[#1A1829] mb-8">Ready to work together?</h2>
-                <p className="font-sans text-xl text-[#1A1829]/70 mb-12 max-w-2xl mx-auto leading-relaxed">
-                    I am actively seeking engineering roles where I can leverage my expertise in process simulation and sustainable materials. My inbox is open.
+                <div className="max-w-4xl mx-auto text-center" data-cursor="hover">
+                    <h2 className="font-heading font-bold text-4xl md:text-6xl text-[#1A1829] mb-4">Let's Connect</h2>
+                    <p className="font-sans text-sm md:text-base text-[#1A1829]/70 mb-10">I am currently looking for full-time opportunities in process engineering, sustainable materials, and modeling.</p>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <a href="mailto:shivam100401@gmail.com" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
+                            <div className="w-12 h-12 bg-[#FF6B4A]/10 text-[#FF6B4A] rounded-full flex items-center justify-center group-hover:bg-[#FF6B4A] group-hover:text-white transition-colors">
+                                <i data-lucide="mail"></i>
+                            </div>
+                            <span className="font-heading font-semibold text-[#1A1829] text-[0.95rem]">Direct Email</span>
+                            <span className="font-sans text-xs text-[#1A1829]/50">shivam100401@gmail.com</span>
+                        </a>
+
+                        <a href="https://linkedin.com/in/shivam100401" target="_blank" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
+                            <div className="w-12 h-12 bg-[#4A90E2]/10 text-[#4A90E2] rounded-full flex items-center justify-center group-hover:bg-[#4A90E2] group-hover:text-white transition-colors">
+                                <i data-lucide="linkedin"></i>
+                            </div>
+                            <span className="font-heading font-semibold text-[#1A1829] text-[0.95rem]">LinkedIn Network</span>
+                            <span className="font-sans text-xs text-[#1A1829]/50">Connect professionally</span>
+                        </a>
+
+                        <a href="#" className="group flex flex-col items-center gap-3 bg-white/60 p-6 rounded-3xl hover:bg-white transition-colors" data-cursor="magnetic">
+                            <div className="w-12 h-12 bg-[#1A1829]/10 text-[#1A1829] rounded-full flex items-center justify-center group-hover:bg-[#1A1829] group-hover:text-white transition-colors">
+                                <i data-lucide="file-text"></i>
+                            </div>
+                            <span className="font-heading font-semibold text-[#1A1829] text-[0.95rem]">Full Resume</span>
+                            <span className="font-sans text-xs text-[#1A1829]/50">Download specifications</span>
+                        </a>
+                    </div>
+                </div>
+
+                <p className="mt-12 text-center font-data text-[10px] text-[#1A1829]/40 uppercase tracking-widest">
+                    © {new Date().getFullYear()} Shivam Patel. Designed with Precision.
                 </p>
-
-                <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-16">
-                    <a href="mailto:shivam100401@gmail.com.com" className="bg-[#FF6B4A] text-[#FAF8F5] px-10 py-5 rounded-full font-heading font-bold text-lg tracking-wide magnetic-btn shadow-[0_8px_20px_rgba(255,107,74,0.3)] w-full md:w-auto hover:shadow-[0_12px_25px_rgba(255,107,74,0.4)] transition-shadow">
-                        Email Me
-                    </a>
-                </div>
-
-                <div className="flex justify-center gap-8">
-                    <a href="https://www.linkedin.com/in/shivam100401/" target="_blank" className="text-[#1A1829]/60 hover:text-[#4A90E2] hover:-translate-y-1 transition-all flex flex-col items-center gap-2 group">
-                        <div className="bg-white p-4 rounded-full shadow-sm border border-[#1A1829]/5 group-hover:shadow-md transition-shadow">
-                            <i data-lucide="linkedin" className="w-6 h-6"></i>
-                        </div>
-                        <span className="font-sans text-sm font-semibold">LinkedIn</span>
-                    </a>
-                    <a href="mailto:shivam100401@gmail.com" className="text-[#1A1829]/60 hover:text-[#FF6B4A] hover:-translate-y-1 transition-all flex flex-col items-center gap-2 group">
-                        <div className="bg-white p-4 rounded-full shadow-sm border border-[#1A1829]/5 group-hover:shadow-md transition-shadow">
-                            <i data-lucide="mail" className="w-6 h-6"></i>
-                        </div>
-                        <span className="font-sans text-sm font-semibold">Email</span>
-                    </a>
-                    <a href="#" download className="text-[#1A1829]/60 hover:text-[#1A1829] hover:-translate-y-1 transition-all flex flex-col items-center gap-2 group">
-                        <div className="bg-white p-4 rounded-full shadow-sm border border-[#1A1829]/5 group-hover:shadow-md transition-shadow">
-                            <i data-lucide="file-text" className="w-6 h-6"></i>
-                        </div>
-                        <span className="font-sans text-sm font-semibold">Download CV</span>
-                    </a>
-                </div>
             </section>
 
             <footer className="bg-[#1A1829] text-[#FAF8F5] pt-20 pb-12 px-6 md:px-16 rounded-t-[3rem] relative z-10 w-full">
